@@ -8,6 +8,10 @@ export default class ChatAddRoom {
     this.users_list = this.users_list.filter(function (user) {
       return user != opts.user_email;
     });
+    ////remove administrator
+    var array_users = this.users_list.indexOf("Administrator");
+    this.users_list.splice(array_users, 1);
+    ////
     this.setup();
   }
 
