@@ -34,7 +34,7 @@ Supports Frappe version 13 and develop.
 1. Get the app from the repository.
 
    ```
-   $ bench get-app chat
+   $ bench get-app https://github.com/bvisible/chat.git
    ```
 
 2. Install the app on your site.
