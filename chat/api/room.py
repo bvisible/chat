@@ -36,7 +36,7 @@ def get(email: str) -> List[Dict]:
                 users = frappe.get_cached_doc('Chat Settings').chat_operators
             if email not in [u.user for u in users]:
                 continue
-        room['is_read'] = 1 if email in room['is_read'] else 0
+        room['is_read'] = 1 if room['is_read'] and email in room['is_read'] else 0
         user_rooms.append(room)
 
     user_rooms.sort(key=lambda room: comparator(room))
@@ -67,7 +67,7 @@ def create_private(room_name, users, type):
         if direct_room_exists:
             frappe.throw(title="Error", msg=_("Direct Room already exists!"))
 
-    room_doc = get_private_room_doc(room_name, members, type).insert()
+    room_doc = get_private_room_doc(room_name, members, type).insert(ignore_permissions=True)
 
     profile = {
         "room_name": room_name,
